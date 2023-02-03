@@ -140,6 +140,23 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- [[ Custom keymaps ]]
+-- swap ; and : for easier typing
+vim.keymap.set('n', ';', ':', { noremap = true })
+vim.keymap.set('n', ':', ';', { noremap = true })
+
+-- swap block visual and visual
+vim.keymap.set({ 'n', 'v' }, 'v', '<C-v>', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, '<C-v>', 'v', { noremap = true })
+
+-- move lines with ALT+Up and ALT+Down
+vim.keymap.set('n', '<A-Up>', ':m .-2<CR>==', { noremap = true })
+vim.keymap.set('n', '<A-Down>', ':m .+1<CR>==', { noremap = true })
+vim.keymap.set('i', '<A-Up>', '<ESC>:m .-2<CR>==gi', { noremap = true })
+vim.keymap.set('i', '<A-Down>', '<ESC>:m .+1<CR>==gi', { noremap = true })
+vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true })
+vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true })
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -423,26 +440,6 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
--- my customisations
-
--- swap ; and : for easier typing
-vim.keymap.set('n', ';', ':', { noremap = true })
-vim.keymap.set('n', ':', ';', { noremap = true })
-
--- swap block visual and visual
-vim.keymap.set('n', 'v', '<C-v>', { noremap = true })
-vim.keymap.set('n', '<C-v>', 'v', { noremap = true })
-vim.keymap.set('v', 'v', '<C-v>', { noremap = true })
-vim.keymap.set('v', '<C-v>', 'v', { noremap = true })
-
--- move lines with ALT+Up and ALT+Down
-vim.keymap.set('i', '<A-Up>', '<ESC>:m .-2<CR>==gi', { noremap = true })
-vim.keymap.set('i', '<A-Down>', '<ESC>:m .+1<CR>==gi', { noremap = true })
-vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true })
-vim.keymap.set('n', '<A-Down>', ':m .+1<CR>==', { noremap = true })
-vim.keymap.set('n', '<A-Up>', ':m .-2<CR>==', { noremap = true })
-vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true })
 
 -- set blinking cursor when quitting, I don't like the block cursor in the terminal
 vim.api.nvim_create_autocmd('VimLeave', {
