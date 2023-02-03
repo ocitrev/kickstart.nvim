@@ -424,5 +424,30 @@ cmp.setup {
   },
 }
 
+-- my customisations
+
+-- swap ; and : for easier typing
+vim.keymap.set('n', ';', ':', { noremap = true })
+vim.keymap.set('n', ':', ';', { noremap = true })
+
+-- swap block visual and visual
+vim.keymap.set('n', 'v', '<C-v>', { noremap = true })
+vim.keymap.set('n', '<C-v>', 'v', { noremap = true })
+vim.keymap.set('v', 'v', '<C-v>', { noremap = true })
+vim.keymap.set('v', '<C-v>', 'v', { noremap = true })
+
+-- move lines with ALT+Up and ALT+Down
+vim.keymap.set('i', '<A-Up>', '<ESC>:m .-2<CR>==gi', { noremap = true })
+vim.keymap.set('i', '<A-Down>', '<ESC>:m .+1<CR>==gi', { noremap = true })
+vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true })
+vim.keymap.set('n', '<A-Down>', ':m .+1<CR>==', { noremap = true })
+vim.keymap.set('n', '<A-Up>', ':m .-2<CR>==', { noremap = true })
+vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true })
+
+-- set blinking cursor when quitting, I don't like the block cursor in the terminal
+vim.api.nvim_create_autocmd('VimLeave', {
+  command = 'set guicursor=a:ver1-blinkon500'
+})
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
